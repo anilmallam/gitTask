@@ -4,16 +4,25 @@ pipeline {
         stage('Example Build') {
             agent { docker 'maven:3.8.1-adoptopenjdk-11' } 
             steps {
-                echo 'Hello, Maven'
+                echo 'Hello, psycho Maven'
+		echo 'hello, maven'
                 sh 'mvn --version'
             }
         }
         stage('Example Test') {
             agent { docker 'openjdk:8-jre' } 
             steps {
-                echo 'Hello, JDK'
+                echo 'Hello, psycho'
                 sh 'java -version'
             }
+        }
+    }
+}
+node("myAgent") {
+    timeout(unit: 'SECONDS', time: 5) {
+        stage("One"){
+            sleep 10
+            echo 'hello'
         }
     }
 }
